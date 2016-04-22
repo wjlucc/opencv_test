@@ -7,8 +7,8 @@ using namespace std;
 using namespace cv;
 
 #define FIRST 1
-#define BLACK 2
-#define RED 2
+#define BLACK 1
+#define RED 0
 #define GREEN 1
 #define BLUE 1
 #define SURREND 0

@@ -8,7 +8,7 @@ using namespace cv;
 
 #define FIRST 1
 #define BLACK 3
-#define RED 0
+#define RED 2
 #define GREEN 1
 #define BLUE 1
 #define SURREND 0

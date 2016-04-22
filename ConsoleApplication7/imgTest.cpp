@@ -6,7 +6,7 @@
 using namespace std;
 using namespace cv;
 
-#define FIRST 1
+#define FIRST 0
 #define BLACK 0
 #define RED 0
 #define GREEN 2

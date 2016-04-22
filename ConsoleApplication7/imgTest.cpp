@@ -152,7 +152,7 @@ int main()
 	
 #if SPLIT
 
-	//将彩色图像的三个通道提取处理，分别做处理。之后再合起来。每一个通道都是一个图片
+	//将彩色图像的三个通道提取处理，分别做处理。之后再合起来。每一个通道都是一个图�?
 
 	Mat splitTest = img.clone();
 	vector<Mat> planes;
@@ -161,7 +161,7 @@ int main()
 	imshow("planes[1]", planes[1]);
 	imshow("planes[2]", planes[2]);
 
-	planes[1] = grey;		//这里的grey是个灰度图。将灰度图像和蓝色通道混合起来。
+	planes[1] = grey;		//这里的grey是个灰度图。将灰度图像和蓝色通道混合起来�?
 
 	merge(planes, splitTest);
 	imshow("splitTest", splitTest);
@@ -173,9 +173,9 @@ int main()
 	Mat add = img.clone();
 	Mat temp;
 	cv::add(grey, cv::Scalar(100), temp);	
-	//cv::add(grey, grey, add);	//这里的想加是两个灰度图像相加。
+	//cv::add(grey, grey, add);	//这里的想加是两个灰度图像相加�?
 	//cv::addWeighted(grey,2, grey,3,20, add);	//这个是将两张图像按照权重叠加
-	cv::subtract(temp,grey,add);	//两个图像逐元素相减，还有相乘相除等操作。参与运算的两个图像大小必须相同。这个函数在文档中有一个字母错误
+	cv::subtract(temp,grey,add);	//两个图像逐元素相减，还有相乘相除等操作。参与运算的两个图像大小必须相同。这个函数在文档中有一个字母错�?
 
 	imshow("add", add);
 #endif
@@ -186,7 +186,7 @@ int main()
 	cout << "image:" << image.cols << " " << image.rows << endl;
 	cout << " logo:" << logo.cols << " " << logo.rows << endl;
 	Mat roi;
-	roi = image(Rect(160, 160, logo.cols, logo.rows));		//这里不熟悉
+	roi = image(Rect(160, 160, logo.cols, logo.rows));		//这里不熟�?
 	addWeighted(roi, 1, logo, 0.3, 0., roi);
 	cout << " roi:" << roi.cols << " " << roi.rows << endl;
 	imshow("roi", roi);
@@ -211,7 +211,7 @@ int main()
 	int dim(256);
 	Mat lut(1, &dim, CV_8U);
 	for (int i = 0; i < 256; ++i)
-		lut.at<uchar>(i) = 255 - i;		//利用at也可以访问像素，为何用255-i？
+		lut.at<uchar>(i) = 255 - i;		//利用at也可以访问像素，为何�?55-i�?
 	LUT(grey, lut, result);
 	imshow("lut", lut);
 
@@ -241,16 +241,16 @@ int main()
 	imshow("grey", grey);
 
 	Mat result;
-	Mat element(5, 5, CV_8U, Scalar(1));		//用于腐蚀和膨胀的结构元素，还可以自己定义想要的形状。
+	Mat element(5, 5, CV_8U, Scalar(1));		//用于腐蚀和膨胀的结构元素，还可以自己定义想要的形状�?
 
 	dilate(grey, result, element);			
 	imshow("dilate", result);
 
-	erode(result, result, element);				//博客上两者位置错误
+	erode(result, result, element);				//博客上两者位置错�?
 	imshow("erode", result);
 
-	//使用结构元素B对A进行开操作就是用B对A腐蚀，然后再用B对结果进行膨胀。
-	//使用结构元素B对A的闭操作就是用B对A进行膨胀，然后用B对结果进行腐蚀。
+	//使用结构元素B对A进行开操作就是用B对A腐蚀，然后再用B对结果进行膨胀�?
+	//使用结构元素B对A的闭操作就是用B对A进行膨胀，然后用B对结果进行腐蚀�?
 		
 	Mat close;
 	morphologyEx(grey, close, MORPH_CLOSE, element);
@@ -276,7 +276,7 @@ int main()
 	imshow("gaussian", blurr);
 
 	pyrDown(grey, blurr);
-	imshow("pyrDown", blurr);				//下采样？？用于缩小图片，和之前的resize()有何区别？
+	imshow("pyrDown", blurr);				//下采样？？用于缩小图片，和之前的resize()有何区别�?
 
 	pyrUp(grey, blurr);						//上采样，
 	imshow("pyrUp", blurr);
@@ -288,7 +288,7 @@ int main()
 	Sobel(grey, sobel, CV_8U, 0, 1, 3, 0.4, 128);
 	imshow("sobelY", sobel);
 
-	Sobel(grey, sobel, CV_8U, 1, 0, 3, 0.4, 128);	//Sobel 滤波器是用来干什么的？
+	Sobel(grey, sobel, CV_8U, 1, 0, 3, 0.4, 128);	//Sobel 滤波器是用来干什么的�?
 	imshow("sobelX", sobel);
 	
 

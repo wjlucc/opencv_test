@@ -7,7 +7,7 @@ using namespace std;
 using namespace cv;
 
 #define FIRST 1
-#define BLACK 3
+#define BLACK 2
 #define RED 2
 #define GREEN 1
 #define BLUE 1
@@ -152,7 +152,7 @@ int main()
 	
 #if SPLIT
 
-	//½«²ÊÉ«Í¼ÏñµÄÈı¸öÍ¨µÀÌáÈ¡´¦Àí£¬·Ö±ğ×ö´¦Àí¡£Ö®ºóÔÙºÏÆğÀ´¡£Ã¿Ò»¸öÍ¨µÀ¶¼ÊÇÒ»¸öÍ¼Æ¬
+	//å°†å½©è‰²å›¾åƒçš„ä¸‰ä¸ªé€šé“æå–å¤„ç†ï¼Œåˆ†åˆ«åšå¤„ç†ã€‚ä¹‹åå†åˆèµ·æ¥ã€‚æ¯ä¸€ä¸ªé€šé“éƒ½æ˜¯ä¸€ä¸ªå›¾ç‰‡
 
 	Mat splitTest = img.clone();
 	vector<Mat> planes;
@@ -161,7 +161,7 @@ int main()
 	imshow("planes[1]", planes[1]);
 	imshow("planes[2]", planes[2]);
 
-	planes[1] = grey;		//ÕâÀïµÄgreyÊÇ¸ö»Ò¶ÈÍ¼¡£½«»Ò¶ÈÍ¼ÏñºÍÀ¶É«Í¨µÀ»ìºÏÆğÀ´¡£
+	planes[1] = grey;		//è¿™é‡Œçš„greyæ˜¯ä¸ªç°åº¦å›¾ã€‚å°†ç°åº¦å›¾åƒå’Œè“è‰²é€šé“æ··åˆèµ·æ¥ã€‚
 
 	merge(planes, splitTest);
 	imshow("splitTest", splitTest);
@@ -173,9 +173,9 @@ int main()
 	Mat add = img.clone();
 	Mat temp;
 	cv::add(grey, cv::Scalar(100), temp);	
-	//cv::add(grey, grey, add);	//ÕâÀïµÄÏë¼ÓÊÇÁ½¸ö»Ò¶ÈÍ¼ÏñÏà¼Ó¡£
-	//cv::addWeighted(grey,2, grey,3,20, add);	//Õâ¸öÊÇ½«Á½ÕÅÍ¼Ïñ°´ÕÕÈ¨ÖØµş¼Ó
-	cv::subtract(temp,grey,add);	//Á½¸öÍ¼ÏñÖğÔªËØÏà¼õ£¬»¹ÓĞÏà³ËÏà³ıµÈ²Ù×÷¡£²ÎÓëÔËËãµÄÁ½¸öÍ¼Ïñ´óĞ¡±ØĞëÏàÍ¬¡£Õâ¸öº¯ÊıÔÚÎÄµµÖĞÓĞÒ»¸ö×ÖÄ¸´íÎó
+	//cv::add(grey, grey, add);	//è¿™é‡Œçš„æƒ³åŠ æ˜¯ä¸¤ä¸ªç°åº¦å›¾åƒç›¸åŠ ã€‚
+	//cv::addWeighted(grey,2, grey,3,20, add);	//è¿™ä¸ªæ˜¯å°†ä¸¤å¼ å›¾åƒæŒ‰ç…§æƒé‡å åŠ 
+	cv::subtract(temp,grey,add);	//ä¸¤ä¸ªå›¾åƒé€å…ƒç´ ç›¸å‡ï¼Œè¿˜æœ‰ç›¸ä¹˜ç›¸é™¤ç­‰æ“ä½œã€‚å‚ä¸è¿ç®—çš„ä¸¤ä¸ªå›¾åƒå¤§å°å¿…é¡»ç›¸åŒã€‚è¿™ä¸ªå‡½æ•°åœ¨æ–‡æ¡£ä¸­æœ‰ä¸€ä¸ªå­—æ¯é”™è¯¯
 
 	imshow("add", add);
 #endif
@@ -186,7 +186,7 @@ int main()
 	cout << "image:" << image.cols << " " << image.rows << endl;
 	cout << " logo:" << logo.cols << " " << logo.rows << endl;
 	Mat roi;
-	roi = image(Rect(160, 160, logo.cols, logo.rows));		//ÕâÀï²»ÊìÏ¤
+	roi = image(Rect(160, 160, logo.cols, logo.rows));		//è¿™é‡Œä¸ç†Ÿæ‚‰
 	addWeighted(roi, 1, logo, 0.3, 0., roi);
 	cout << " roi:" << roi.cols << " " << roi.rows << endl;
 	imshow("roi", roi);
@@ -211,7 +211,7 @@ int main()
 	int dim(256);
 	Mat lut(1, &dim, CV_8U);
 	for (int i = 0; i < 256; ++i)
-		lut.at<uchar>(i) = 255 - i;		//ÀûÓÃatÒ²¿ÉÒÔ·ÃÎÊÏñËØ£¬ÎªºÎÓÃ255-i£¿
+		lut.at<uchar>(i) = 255 - i;		//åˆ©ç”¨atä¹Ÿå¯ä»¥è®¿é—®åƒç´ ï¼Œä¸ºä½•ç”¨255-iï¼Ÿ
 	LUT(grey, lut, result);
 	imshow("lut", lut);
 
@@ -241,16 +241,16 @@ int main()
 	imshow("grey", grey);
 
 	Mat result;
-	Mat element(5, 5, CV_8U, Scalar(1));		//ÓÃÓÚ¸¯Ê´ºÍÅòÕÍµÄ½á¹¹ÔªËØ£¬»¹¿ÉÒÔ×Ô¼º¶¨ÒåÏëÒªµÄĞÎ×´¡£
+	Mat element(5, 5, CV_8U, Scalar(1));		//ç”¨äºè…èš€å’Œè†¨èƒ€çš„ç»“æ„å…ƒç´ ï¼Œè¿˜å¯ä»¥è‡ªå·±å®šä¹‰æƒ³è¦çš„å½¢çŠ¶ã€‚
 
 	dilate(grey, result, element);			
 	imshow("dilate", result);
 
-	erode(result, result, element);				//²©¿ÍÉÏÁ½ÕßÎ»ÖÃ´íÎó
+	erode(result, result, element);				//åšå®¢ä¸Šä¸¤è€…ä½ç½®é”™è¯¯
 	imshow("erode", result);
 
-	//Ê¹ÓÃ½á¹¹ÔªËØB¶ÔA½øĞĞ¿ª²Ù×÷¾ÍÊÇÓÃB¶ÔA¸¯Ê´£¬È»ºóÔÙÓÃB¶Ô½á¹û½øĞĞÅòÕÍ¡£
-	//Ê¹ÓÃ½á¹¹ÔªËØB¶ÔAµÄ±Õ²Ù×÷¾ÍÊÇÓÃB¶ÔA½øĞĞÅòÕÍ£¬È»ºóÓÃB¶Ô½á¹û½øĞĞ¸¯Ê´¡£
+	//ä½¿ç”¨ç»“æ„å…ƒç´ Bå¯¹Aè¿›è¡Œå¼€æ“ä½œå°±æ˜¯ç”¨Bå¯¹Aè…èš€ï¼Œç„¶åå†ç”¨Bå¯¹ç»“æœè¿›è¡Œè†¨èƒ€ã€‚
+	//ä½¿ç”¨ç»“æ„å…ƒç´ Bå¯¹Açš„é—­æ“ä½œå°±æ˜¯ç”¨Bå¯¹Aè¿›è¡Œè†¨èƒ€ï¼Œç„¶åç”¨Bå¯¹ç»“æœè¿›è¡Œè…èš€ã€‚
 		
 	Mat close;
 	morphologyEx(grey, close, MORPH_CLOSE, element);
@@ -269,16 +269,16 @@ int main()
 
 #if BLUR
 	Mat blurr;
-	blur(grey, blurr, Size(3, 3));			//¿Õ¼äµÍÍ¨¾ùÖµÂË²¨µÄÔ­ÀíÊÇÊ²Ã´£¿
+	blur(grey, blurr, Size(3, 3));			//ç©ºé—´ä½é€šå‡å€¼æ»¤æ³¢çš„åŸç†æ˜¯ä»€ä¹ˆï¼Ÿ
 	imshow("blur", blurr);
 
-	GaussianBlur(grey, blurr, Size(5, 5), 1.5);	//¸ßË¹Ä£ºıµÄÔ­Àí£¿
+	GaussianBlur(grey, blurr, Size(5, 5), 1.5);	//é«˜æ–¯æ¨¡ç³Šçš„åŸç†ï¼Ÿ
 	imshow("gaussian", blurr);
 
 	pyrDown(grey, blurr);
-	imshow("pyrDown", blurr);				//ÏÂ²ÉÑù£¿£¿ÓÃÓÚËõĞ¡Í¼Æ¬£¬ºÍÖ®Ç°µÄresize()ÓĞºÎÇø±ğ£¿
+	imshow("pyrDown", blurr);				//ä¸‹é‡‡æ ·ï¼Ÿï¼Ÿç”¨äºç¼©å°å›¾ç‰‡ï¼Œå’Œä¹‹å‰çš„resize()æœ‰ä½•åŒºåˆ«ï¼Ÿ
 
-	pyrUp(grey, blurr);						//ÉÏ²ÉÑù£¬
+	pyrUp(grey, blurr);						//ä¸Šé‡‡æ ·ï¼Œ
 	imshow("pyrUp", blurr);
 
 #endif // BLUR
@@ -288,7 +288,7 @@ int main()
 	Sobel(grey, sobel, CV_8U, 0, 1, 3, 0.4, 128);
 	imshow("sobelY", sobel);
 
-	Sobel(grey, sobel, CV_8U, 1, 0, 3, 0.4, 128);	//Sobel ÂË²¨Æ÷ÊÇÓÃÀ´¸ÉÊ²Ã´µÄ£¿
+	Sobel(grey, sobel, CV_8U, 1, 0, 3, 0.4, 128);	//Sobel æ»¤æ³¢å™¨æ˜¯ç”¨æ¥å¹²ä»€ä¹ˆçš„ï¼Ÿ
 	imshow("sobelX", sobel);
 	
 

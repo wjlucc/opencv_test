@@ -9,7 +9,7 @@ using namespace cv;
 #define FIRST 1
 #define BLACK 1
 #define RED 0
-#define GREEN 1
+#define GREEN 2
 #define BLUE 1
 #define SURREND 0
 #define ITERATOR 0

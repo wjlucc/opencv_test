@@ -7,7 +7,7 @@ using namespace std;
 using namespace cv;
 
 #define FIRST 1
-#define BLACK 1
+#define BLACK 0
 #define RED 0
 #define GREEN 2
 #define BLUE 1
@@ -36,15 +36,15 @@ int main()
 
 	Mat grey;
 	cvtColor(img, grey, CV_BGR2GRAY);
-	
+
 	imshow("original", img);
 	imshow("grey", grey);
-/*
+	/*
 	Scalar intensity = grey.at<uchar>(Point(111, 243));
 	cout << "intensity:" << intensity.val[0] << endl;
 	cout << "intensity:" << intensity.val[1] << endl;
 	cout << "intensity:" << intensity.val[2] << endl;
-*/
+	*/
 #endif // FIRST	
 
 #if BLACK
@@ -71,7 +71,7 @@ int main()
 	}
 	imshow("black", grey);
 #endif // BLACK
-		
+
 
 #if ITERATOR
 
@@ -136,7 +136,7 @@ int main()
 	uchar *pPre = NULL;
 	uchar *p = NULL;
 	uchar *pNex = NULL;
-	for (int i = 1; i < nr -1; i++)
+	for (int i = 1; i < nr - 1; i++)
 	{
 		pPre = surrend.ptr<uchar>(i - 1);
 		p = surrend.ptr<uchar>(i);
@@ -149,10 +149,10 @@ int main()
 	imshow("surrend", surrend);
 
 #endif 
-	
+
 #if SPLIT
 
-	//å°†å½©è‰²å›¾åƒçš„ä¸‰ä¸ªé€šé“æå–å¤„ç†ï¼Œåˆ†åˆ«åšå¤„ç†ã€‚ä¹‹åŽå†åˆèµ·æ¥ã€‚æ¯ä¸€ä¸ªé€šé“éƒ½æ˜¯ä¸€ä¸ªå›¾ç‰?
+	//½«²ÊÉ«Í¼ÏñµÄÈý¸öÍ¨µÀÌáÈ¡´¦Àí£¬·Ö±ð×ö´¦Àí¡£Ö®ºóÔÙºÏÆðÀ´¡£Ã¿Ò»¸öÍ¨µÀ¶¼ÊÇÒ»¸öÍ¼Æ¬
 
 	Mat splitTest = img.clone();
 	vector<Mat> planes;
@@ -161,7 +161,7 @@ int main()
 	imshow("planes[1]", planes[1]);
 	imshow("planes[2]", planes[2]);
 
-	planes[1] = grey;		//è¿™é‡Œçš„greyæ˜¯ä¸ªç°åº¦å›¾ã€‚å°†ç°åº¦å›¾åƒå’Œè“è‰²é€šé“æ··åˆèµ·æ¥ã€?
+	planes[1] = grey;		//ÕâÀïµÄgreyÊÇ¸ö»Ò¶ÈÍ¼¡£½«»Ò¶ÈÍ¼ÏñºÍÀ¶É«Í¨µÀ»ìºÏÆðÀ´¡£
 
 	merge(planes, splitTest);
 	imshow("splitTest", splitTest);
@@ -172,10 +172,10 @@ int main()
 	Mat img2 = imread("d://data//timg.jpg", 0);
 	Mat add = img.clone();
 	Mat temp;
-	cv::add(grey, cv::Scalar(100), temp);	
-	//cv::add(grey, grey, add);	//è¿™é‡Œçš„æƒ³åŠ æ˜¯ä¸¤ä¸ªç°åº¦å›¾åƒç›¸åŠ ã€?
-	//cv::addWeighted(grey,2, grey,3,20, add);	//è¿™ä¸ªæ˜¯å°†ä¸¤å¼ å›¾åƒæŒ‰ç…§æƒé‡å åŠ 
-	cv::subtract(temp,grey,add);	//ä¸¤ä¸ªå›¾åƒé€å…ƒç´ ç›¸å‡ï¼Œè¿˜æœ‰ç›¸ä¹˜ç›¸é™¤ç­‰æ“ä½œã€‚å‚ä¸Žè¿ç®—çš„ä¸¤ä¸ªå›¾åƒå¤§å°å¿…é¡»ç›¸åŒã€‚è¿™ä¸ªå‡½æ•°åœ¨æ–‡æ¡£ä¸­æœ‰ä¸€ä¸ªå­—æ¯é”™è¯?
+	cv::add(grey, cv::Scalar(100), temp);
+	//cv::add(grey, grey, add);	//ÕâÀïµÄÏë¼ÓÊÇÁ½¸ö»Ò¶ÈÍ¼ÏñÏà¼Ó¡£
+	//cv::addWeighted(grey,2, grey,3,20, add);	//Õâ¸öÊÇ½«Á½ÕÅÍ¼Ïñ°´ÕÕÈ¨ÖØµþ¼Ó
+	cv::subtract(temp, grey, add);	//Á½¸öÍ¼ÏñÖðÔªËØÏà¼õ£¬»¹ÓÐÏà³ËÏà³ýµÈ²Ù×÷¡£²ÎÓëÔËËãµÄÁ½¸öÍ¼Ïñ´óÐ¡±ØÐëÏàÍ¬¡£Õâ¸öº¯ÊýÔÚÎÄµµÖÐÓÐÒ»¸ö×ÖÄ¸´íÎó
 
 	imshow("add", add);
 #endif
@@ -186,7 +186,7 @@ int main()
 	cout << "image:" << image.cols << " " << image.rows << endl;
 	cout << " logo:" << logo.cols << " " << logo.rows << endl;
 	Mat roi;
-	roi = image(Rect(160, 160, logo.cols, logo.rows));		//è¿™é‡Œä¸ç†Ÿæ‚?
+	roi = image(Rect(160, 160, logo.cols, logo.rows));		//ÕâÀï²»ÊìÏ¤
 	addWeighted(roi, 1, logo, 0.3, 0., roi);
 	cout << " roi:" << roi.cols << " " << roi.rows << endl;
 	imshow("roi", roi);
@@ -211,7 +211,7 @@ int main()
 	int dim(256);
 	Mat lut(1, &dim, CV_8U);
 	for (int i = 0; i < 256; ++i)
-		lut.at<uchar>(i) = 255 - i;		//åˆ©ç”¨atä¹Ÿå¯ä»¥è®¿é—®åƒç´ ï¼Œä¸ºä½•ç”?55-iï¼?
+		lut.at<uchar>(i) = 255 - i;		//ÀûÓÃatÒ²¿ÉÒÔ·ÃÎÊÏñËØ£¬ÎªºÎÓÃ255-i£¿
 	LUT(grey, lut, result);
 	imshow("lut", lut);
 
@@ -241,17 +241,17 @@ int main()
 	imshow("grey", grey);
 
 	Mat result;
-	Mat element(5, 5, CV_8U, Scalar(1));		//ç”¨äºŽè…èš€å’Œè†¨èƒ€çš„ç»“æž„å…ƒç´ ï¼Œè¿˜å¯ä»¥è‡ªå·±å®šä¹‰æƒ³è¦çš„å½¢çŠ¶ã€?
+	Mat element(5, 5, CV_8U, Scalar(1));		//ÓÃÓÚ¸¯Ê´ºÍÅòÕÍµÄ½á¹¹ÔªËØ£¬»¹¿ÉÒÔ×Ô¼º¶¨ÒåÏëÒªµÄÐÎ×´¡£
 
-	dilate(grey, result, element);			
+	dilate(grey, result, element);
 	imshow("dilate", result);
 
-	erode(result, result, element);				//åšå®¢ä¸Šä¸¤è€…ä½ç½®é”™è¯?
+	erode(result, result, element);				//²©¿ÍÉÏÁ½ÕßÎ»ÖÃ´íÎó
 	imshow("erode", result);
 
-	//ä½¿ç”¨ç»“æž„å…ƒç´ Bå¯¹Aè¿›è¡Œå¼€æ“ä½œå°±æ˜¯ç”¨Bå¯¹Aè…èš€ï¼Œç„¶åŽå†ç”¨Bå¯¹ç»“æžœè¿›è¡Œè†¨èƒ€ã€?
-	//ä½¿ç”¨ç»“æž„å…ƒç´ Bå¯¹Açš„é—­æ“ä½œå°±æ˜¯ç”¨Bå¯¹Aè¿›è¡Œè†¨èƒ€ï¼Œç„¶åŽç”¨Bå¯¹ç»“æžœè¿›è¡Œè…èš€ã€?
-		
+	//Ê¹ÓÃ½á¹¹ÔªËØB¶ÔA½øÐÐ¿ª²Ù×÷¾ÍÊÇÓÃB¶ÔA¸¯Ê´£¬È»ºóÔÙÓÃB¶Ô½á¹û½øÐÐÅòÕÍ¡£
+	//Ê¹ÓÃ½á¹¹ÔªËØB¶ÔAµÄ±Õ²Ù×÷¾ÍÊÇÓÃB¶ÔA½øÐÐÅòÕÍ£¬È»ºóÓÃB¶Ô½á¹û½øÐÐ¸¯Ê´¡£
+
 	Mat close;
 	morphologyEx(grey, close, MORPH_CLOSE, element);
 	imshow("close", close);
@@ -269,16 +269,16 @@ int main()
 
 #if BLUR
 	Mat blurr;
-	blur(grey, blurr, Size(3, 3));			//ç©ºé—´ä½Žé€šå‡å€¼æ»¤æ³¢çš„åŽŸç†æ˜¯ä»€ä¹ˆï¼Ÿ
+	blur(grey, blurr, Size(3, 3));			//¿Õ¼äµÍÍ¨¾ùÖµÂË²¨µÄÔ­ÀíÊÇÊ²Ã´£¿
 	imshow("blur", blurr);
 
-	GaussianBlur(grey, blurr, Size(5, 5), 1.5);	//é«˜æ–¯æ¨¡ç³Šçš„åŽŸç†ï¼Ÿ
+	GaussianBlur(grey, blurr, Size(5, 5), 1.5);	//¸ßË¹Ä£ºýµÄÔ­Àí£¿
 	imshow("gaussian", blurr);
 
 	pyrDown(grey, blurr);
-	imshow("pyrDown", blurr);				//ä¸‹é‡‡æ ·ï¼Ÿï¼Ÿç”¨äºŽç¼©å°å›¾ç‰‡ï¼Œå’Œä¹‹å‰çš„resize()æœ‰ä½•åŒºåˆ«ï¼?
+	imshow("pyrDown", blurr);				//ÏÂ²ÉÑù£¿£¿ÓÃÓÚËõÐ¡Í¼Æ¬£¬ºÍÖ®Ç°µÄresize()ÓÐºÎÇø±ð£¿
 
-	pyrUp(grey, blurr);						//ä¸Šé‡‡æ ·ï¼Œ
+	pyrUp(grey, blurr);						//ÉÏ²ÉÑù£¬
 	imshow("pyrUp", blurr);
 
 #endif // BLUR
@@ -288,15 +288,15 @@ int main()
 	Sobel(grey, sobel, CV_8U, 0, 1, 3, 0.4, 128);
 	imshow("sobelY", sobel);
 
-	Sobel(grey, sobel, CV_8U, 1, 0, 3, 0.4, 128);	//Sobel æ»¤æ³¢å™¨æ˜¯ç”¨æ¥å¹²ä»€ä¹ˆçš„ï¼?
+	Sobel(grey, sobel, CV_8U, 1, 0, 3, 0.4, 128);	//Sobel ÂË²¨Æ÷ÊÇÓÃÀ´¸ÉÊ²Ã´µÄ£¿
 	imshow("sobelX", sobel);
-	
+
 
 #endif // HIGHT
 	imwrite(fileNameWrite, grey);
 	waitKey();
-	
-	
+
+
 	//system("pause");
 	return 0;
 }

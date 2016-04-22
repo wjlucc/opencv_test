@@ -19,4 +19,18 @@
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="LaplacianZC.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="imgTest.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="watershedSegmentation.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
+  </ItemGroup>
 </Project>

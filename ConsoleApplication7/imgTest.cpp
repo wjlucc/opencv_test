@@ -9,8 +9,8 @@ using namespace cv;
 #define FIRST 0
 #define BLACK 0
 #define RED 0
-#define GREEN 2
-#define BLUE 1
+#define GREEN 0
+#define BLUE 0
 #define SURREND 0
 #define ITERATOR 0
 #define SPLIT 0
@@ -18,11 +18,11 @@ using namespace cv;
 #define ROI 0
 #define SIZE 0
 #define LUTT 0
-#define THRESHOLDED 1
-#define ERODE 1
-#define HIST 1
-#define BLUR 1
-#define HIGHT 1
+#define THRESHOLDED 0
+#define ERODE 0
+#define HIST 0
+#define BLUR 0
+#define HIGHT 0
 
 
 
